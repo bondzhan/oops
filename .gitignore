@@ -10,9 +10,6 @@ gradlew.bat
 # idea files and folders
 .idea/
 
-
-
-
 # Log file
 *.log
 
