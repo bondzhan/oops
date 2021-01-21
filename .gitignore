@@ -1,6 +1,18 @@
 # Compiled class file
 *.class
 
+# gradle files and Folders
+gradlew
+gradle/
+gradlew.bat
+.gradle/
+
+# idea files and folders
+.idea/
+
+
+
+
 # Log file
 *.log
 
