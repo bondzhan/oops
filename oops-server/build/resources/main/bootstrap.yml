@@ -1,0 +1,36 @@
+server:
+  port: 8571
+
+spring:
+  application:
+    name: oops-server
+
+eureka:
+  instance:
+    #    hostname: ${spring.cloud.client.ip-address}
+    # 是否用ip注册
+    prefer-ip-address: true
+    # 实例id
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    # 服务调用的ip地址
+    ip-address: ${spring.cloud.client.ip-address}
+  server:
+    #eureka 默认开启自我保护模式，导致已经不存在的实例还是会显示再eureka上，并继续提供服务。
+    #关闭后，eureka会在一段时间内没有接收到心跳，就删除注册的实例
+    #中小规模下，自我保护模式坑比好处多，所以关闭它
+    enable-self-preservation: false
+    # 心跳阈值计算周期，如果开启自我保护模式，可以改一下这个配置
+    renewal-threshold-update-interval-ms: 120000
+    # 主动失效检测间隔。关闭自我保护模式下，能将失效服务剔除。
+    eviction-interval-timer-in-ms: 5000
+    #禁用readOnlyCacheMap
+    use-read-only-response-cache: false
+  client:
+    # 表示是否将自己注册到eureka server。默认为true。
+    # 如果不做Eureka集群（本地环境），不需要注册。
+    register-with-eureka: false
+    # 表示是否从eureka server获取注册信息，默认为true
+    # 如果是单一节点，不需要同步其他eureka server节点，则可以设置为false，但此处为集群，应该设置为true。
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8571/eureka/
