@@ -1,6 +1,7 @@
 package org.you.oops.order.interfaces.facade;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.you.oops.order.interfaces.dto.UserOrderDto;
 import org.you.oops.order.interfaces.fallback.UserOrderApiFallback;
@@ -9,6 +10,6 @@ import org.you.oops.order.interfaces.fallback.UserOrderApiFallback;
 public interface UserOderApi {
 
     @RequestMapping("findUserOrderById")
-    public UserOrderDto findUserOrderById(String userId);
+    public UserOrderDto findUserOrderById(@RequestBody String userId);
 
 }

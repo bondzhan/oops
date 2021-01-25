@@ -19,21 +19,6 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8571/eureka/
 
-feign:
-  hystrix:
-    # 启用Hystrix
-    enabled: true
-  client:
-    default-to-properties: true
-    default-config: default
-    config:
-      # 默认feign配置，指定feign名称，可覆盖默认配置。
-      default:
-        # 连接超时时间
-        connect-timeout: 5000
-        # 建立连接后从服务器读取到可用资源所用的时间。
-        read-timeout: 60000
-        logger-level: FULL
 
 
 # 从Eureka中找到Config服务并读取配置
