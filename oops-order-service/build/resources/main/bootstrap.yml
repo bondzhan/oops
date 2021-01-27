@@ -19,8 +19,6 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8571/eureka/
 
-
-
 # 从Eureka中找到Config服务并读取配置
 spring:
   application:
@@ -30,6 +28,12 @@ spring:
   # 允许覆盖Bean实例
   main:
     allow-bean-definition-overriding: true
+
+  datasource:
+    url: jdbc:mysql://192.168.0.208:3306/bbc?useAffectedRows=true&rewriteBatchedStatements=true&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: U4hwhgtnJs
+    driver-class-name: com.mysql.cj.jdbc.Driver
 #  cloud:
 #    config:
 #      discovery:

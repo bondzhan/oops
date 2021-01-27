@@ -10,6 +10,6 @@ import org.you.oops.order.interfaces.fallback.UserOrderApiFallback;
 public interface UserOderApi {
 
     @RequestMapping("findUserOrderById")
-    public UserOrderDto findUserOrderById(@RequestBody String userId);
+    public UserOrderDto findUserOrderById(@RequestBody UserOrderDto userOrderDto);
 
 }

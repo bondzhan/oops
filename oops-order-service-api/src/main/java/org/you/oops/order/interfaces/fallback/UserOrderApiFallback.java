@@ -8,7 +8,7 @@ import org.you.oops.order.interfaces.facade.UserOderApi;
 public class UserOrderApiFallback implements UserOderApi {
 
     @Override
-    public UserOrderDto findUserOrderById(String userId) {
-        return new UserOrderDto("no","something","worng");
+    public UserOrderDto findUserOrderById(UserOrderDto userOrderDto) {
+        return new UserOrderDto();
     }
 }

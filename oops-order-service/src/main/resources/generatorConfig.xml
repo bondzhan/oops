@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 指定数据库环境 -->
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 自定义XML格式化器（可选） -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- 自定义插件（可选） -->
+        <plugin type="org.mybatis.generator.plugins.CachePlugin"/>
+
+        <!-- 自定义注释生成器（可选） -->
+        <commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator"/>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!-- 文件路径：实体 -->
+        <javaModelGenerator targetProject="${file.modelDir}" targetPackage="${file.modelPackage}"/>
+
+        <!-- 文件路径：xxxMapper.xml -->
+        <sqlMapGenerator targetProject="${file.xmlDir}" targetPackage="${file.xmlPackage}"/>
+
+        <!-- 文件路径：xxxMapper.java（可选） -->
+        <javaClientGenerator targetProject="${file.clientDir}" targetPackage="${file.clientPackage}" type="XMLMAPPER"/>
+
+        <!-- 要生成的关系表 -->
+        <table tableName="t_bbc_order" domainObjectName="BbcOrder">
+            <columnOverride column="forder_type" javaType="java.lang.Integer"/>
+            <columnOverride column="forder_status" javaType="java.lang.Integer"/>
+            <columnOverride column="fcancel_type" javaType="java.lang.Integer"/>
+            <columnOverride column="fbonded_order_type" javaType="java.lang.Integer"/>
+        </table>
+        <table tableName="t_bbc_order_payment" domainObjectName="BbcOrderPayment">
+            <columnOverride column="forder_source" javaType="java.lang.Integer"/>
+            <columnOverride column="forder_type" javaType="java.lang.Integer"/>
+            <columnOverride column="forder_status" javaType="java.lang.Integer"/>
+            <columnOverride column="forder_pay_type" javaType="java.lang.Integer"/>
+            <columnOverride column="forder_thirdpay_type" javaType="java.lang.Integer"/>
+            <columnOverride column="fthird_trade_status" javaType="java.lang.Integer"/>
+            <columnOverride column="fchannel_order_type" javaType="java.lang.Integer"/>
+        </table>
+        <table tableName="t_bbc_user" domainObjectName="BbcUser"/>
+        <table tableName="t_bbc_user_account" domainObjectName="BbcUserAccount"/>
+    </context>
+</generatorConfiguration>

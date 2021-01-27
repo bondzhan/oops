@@ -3,6 +3,7 @@ plugins {
     id "org.springframework.boot" version "2.1.0.RELEASE"
     id "java"
     id "application"
+    id 'org.jbooster.mybatis.generator' version '0.1.3'
 }
 
 dependencyManagement {
@@ -20,6 +21,8 @@ dependencies {
     compile("org.springframework.cloud:spring-cloud-config-client")
     compile("org.springframework.cloud:spring-cloud-starter-openfeign")
     compile("org.springframework.cloud:spring-cloud-starter-sleuth")
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0")
+    compile('mysql:mysql-connector-java:8.0.11')
 
     compile project(":oops-order-service-api")
 
@@ -29,4 +32,59 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+sourceSets.main.resources.srcDirs = ["src/main/java","src/main/resources"]
+
+jar {
+    baseName = 'oops-order-service'
+    version = '1.0.0'
+    from('src/main/java') {
+        include 'org/you/oops/order/domain/userorder/repository/mapper/*.xml'
+    }
+}
+
+mbg {
+    // 是否覆盖旧文件，默认为true
+    overwrite = true
+
+    // 是否打印执行过程日志，默认为false
+    verbose = false
+
+    // 是否打印调试日志，默认为false
+    debug = false
+
+    // 数据库连接信息，在xml中的引用方式：${jdbc.属性名}
+    // 若该信息已在xml文件中写死，则不必在此处配置
+    jdbc {
+        // 驱动类，默认为'com.mysql.jdbc.Driver'
+        driver = 'com.mysql.jdbc.Driver'
+        // 默认为空
+        url = 'jdbc:mysql://192.168.0.208:3306/bbc?useSSL=false'
+        // 默认为root
+        username = 'root'
+        // 默认为空
+        password = 'U4hwhgtnJs'
+    }
+
+    // 配置文件路径（默认包含generatorConfig.xml）及上下文，支持多配置文件
+    // key：配置文件路径（在src/main/resources下的相对路径）
+    // value：上下文
+    config['generatorConfig.xml'] = {
+        // 待生成的文件路径信息，在xml中的引用方式：${file.属性名}
+        // 以下皆为默认配置，不建议自定义配置，推荐默认配置
+        // 若在此处配该信息已在xml文件中写死，则不必设置，使用空闭包即可
+
+        // 实体类文件
+        modelDir = 'src/main/java'
+        modelPackage = "org.you.oops.order.domain.userorder.repository.po"
+
+        // *Mapper.xml文件
+        xmlDir = 'src/main/java'
+        xmlPackage = 'org.you.oops.order.domain.userorder.repository.mapper'
+
+        // *Mapper.java文件
+        clientDir = 'src/main/java'
+        clientPackage = "org.you.oops.order.domain.userorder.repository.mapper"
+    }
 }
